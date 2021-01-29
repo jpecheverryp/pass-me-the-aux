@@ -6,7 +6,7 @@
     padding: 20em;
 } */
 .dim {
-    max-width: ;
+    max-width: auto;
     max-height: 20em;
     overflow: hidden;
     overflow: scroll;

@@ -11,26 +11,21 @@ $(document).ready(function () {
         // }).then(function (response) {
         //     console.log(response);
         // });
-        console.log('test');
         song = $("#songName").val();
         artist = $("#artistName").val();
         queryUrl = "https://api.lyrics.ovh/v1/" + artist + "/" + song + "/";
-        console.log(queryUrl);
 
         $.ajax({
             url: queryUrl,
             method: "GET"
         }).then(function (result) {
-            console.log(result);
-
+            // Get lyrics
             var lyrics = result.lyrics;
-            console.log(lyrics);
-
-            var songTitle = $('#song-title');
-            songTitle.text(song);
-
-            var lyricsEl = $('#lyrics');
-            lyricsEl.text(lyrics)
+            // Write title 
+            $('#song-title').text(song);
+            // Write Lyrics
+            $('#lyrics').html("<div id='lyrics'>" + result.lyrics.replace(/\n/g, "<br />") + '</div>');
+            $('#lyrics').addClass('overflow');
         })
     });
 })

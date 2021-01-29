@@ -12,3 +12,25 @@ $(document).ready(function() {
         console.log(response);
     });
 };
+
+$(".btn").on("click", function (e) {
+    e.preventDefault()
+
+    song = $("#songName").val();
+    artist = $("#artistName").val();
+    queryUrl = "https://api.lyrics.ovh/v1/" + artist + "/" + song + "/";
+    console.log(queryUrl);
+
+    $.ajax({
+        url: queryUrl,
+        method: "GET"
+    }).then(function(result){
+        console.log(result);
+
+        var lyrics = result.lyrics;
+        console.log(lyrics);
+
+        var printLyrics = $("<p>").text(lyrics)
+        $(".overflow").append(printLyrics);
+    })
+});

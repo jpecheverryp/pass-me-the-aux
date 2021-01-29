@@ -4,30 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WeatherAPI</title>
+    <title>Pass Me The Aux</title>
     <link rel="stylesheet" href="./assets/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 </head>
-<header>
-    <div>
+
+<body>
+    <header>
         <nav>
             <div class="nav-wrapper">
                 <a href="" class="brand-logo left space">Pass Me the Aux</a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a href="">Home</a></li>
-                    <li><a href="">Extra</a></li>
-                    <li><a href="">extra</a></li>
-                </ul>
             </div>
         </nav>
-    </div>
-</header>
+    </header>
 
-<br>
-<br>
-<br>
-
-<body>
+    <br>
+    <br>
+    <br>
     <div class="container moreSpace">
         <div class="row">
             <div class="col s5">
@@ -39,13 +32,17 @@
                     <input placeholder="Type Something..." id="songName" type="text" class="validate">
                     <label for="Song">Song</label>
                 </div>
+                <div id="recent search">
+
+                </div>
             </div>
             <div class="col s7">
                 <div class="col s12">
                     <div class="card dim">
-                        <div class="card-content">
+                        <div class="card-content" id="lyrics">
                             <span class="card-title">Lyrics</span>
-                            <p class="overflow">I am a very simple card. I am good at containing small bits of information.
+                            <p class="overflow">I am a very simple card. I am good at containing small bits of
+                                information.
                                 I am convenient because I require little markup to use effectively.
                                 I am a very simple card. I am good at containing small bits of information.
                                 I am convenient because I require little markup to use effectively.
@@ -56,21 +53,14 @@
                 </div>
                 <div class="col s12">
                     <div class="card">
-                        <div class="card-content">
+                        <div class="card-content" id="events">
                             <span class="card-title">Events</span>
                             <p>I am a very simple card. I am good at containing small bits of information.
                                 I am convenient because I require little markup to use effectively.</p>
                         </div>
                     </div>
                 </div>
-                <div id="recent search">
-
-                </div>
-                <div id="lyrics">
-
-                </div>
-                <div id="events">
-                </div>
+                
             </div>
         </div>
 

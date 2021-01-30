@@ -34,6 +34,14 @@ $(document).ready(function () {
             var data = response.slice(0, 10);
             console.log(data);
             console.log(queryURL);
+            for(var i = 0; i < data.length; i++){
+                var relatedSongs = $("<div class='collection'>");
+                var relSongEl = $("<a href='#!' class='collection-item'>")
+                relSongEl.text(response[i].title);
+                relatedSongs.append(relSongEl);
+                $("#related").append(relatedSongs);
+            }
+
         });
 
         song = $("#songName").val();

@@ -32,8 +32,6 @@ $(document).ready(function () {
         
     }
 
-    console.log(isSaved('thunderstruck'));
-
     $("#submit-btn").on("click", function (event) {
         event.preventDefault();
         // songsterr API
@@ -55,8 +53,12 @@ $(document).ready(function () {
         queryUrl = "https://api.lyrics.ovh/v1/" + artist + "/" + song + "/";
 
         // Saving artist and song to array
-        recentSearches.push([artist, song]);
-        localStorage.setItem('recentSearches', JSON.stringify(recentSearches))
+
+        if (isSaved(song) === false ) {
+            recentSearches.push([artist, song]);
+            localStorage.setItem('recentSearches', JSON.stringify(recentSearches))
+        }
+
 
         displayChips(recentSearches)
 

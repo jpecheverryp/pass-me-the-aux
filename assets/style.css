@@ -2,16 +2,13 @@
     margin-left: 1em;
 }
 
-/* .moreSpace {
-    padding: 20em;
-} */
+.margin {
+    margin: 1em;
+}
+
 .dim {
     max-width: auto;
     max-height: 20em;
     overflow: hidden;
     overflow: scroll;
 }
-/* .overflow {
-    
-    
-} */

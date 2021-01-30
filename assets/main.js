@@ -24,10 +24,7 @@ $(document).ready(function () {
         var localSearches = JSON.parse(localStorage.getItem('recentSearches'))
         
         for (var i = 0; i < localSearches.length; i++) {
-            console.log(song.toLowerCase().trim());
-            console.log(element[1]);
-            console.log(song.toLowerCase().trim() === element[1] );
-            if(song.toLowerCase().trim() === element[1] ) {
+            if(song.toLowerCase().trim() === localSearches[0][1] ) {
                 return true;
             }
         }
@@ -35,7 +32,7 @@ $(document).ready(function () {
         
     }
 
-    console.log(isSaved('yesterday'));
+    console.log(isSaved('thunderstruck'));
 
     $("#submit-btn").on("click", function (event) {
         event.preventDefault();

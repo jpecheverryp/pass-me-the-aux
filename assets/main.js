@@ -1,16 +1,19 @@
 $(document).ready(function () {
     $("#submit-btn").on("click", function (event) {
         event.preventDefault();
-        // // songkick API
-        // var apiKey = "not sure yet";
-        // var queryURL = "https://api.songkick.com/api/3.0/artists/379603/gigography.json?apikey={your_api_key}" + apiKey;
+        // songsterr API
+       
+        var artist = $("#artistName").val();
+        var queryURL = "http://www.songsterr.com/a/ra/songs.json?pattern=" + artist;
 
-        // $.ajax({
-        //     url: queryUrl,
-        //     method: "GET"
-        // }).then(function (response) {
-        //     console.log(response);
-        // });
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function (response) {
+            console.log(response);
+            console.log(queryURL);
+        });
+
         song = $("#songName").val();
         artist = $("#artistName").val();
         queryUrl = "https://api.lyrics.ovh/v1/" + artist + "/" + song + "/";

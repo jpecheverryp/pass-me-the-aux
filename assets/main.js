@@ -1,4 +1,13 @@
 $(document).ready(function () {
+
+    if(localStorage.getItem('recentSearches') === null){
+        var recentSearches = ['Adele / Hello'];
+        localStorage.setItem('recentSearches', JSON.stringify(recentSearches));
+    } else {
+        var recentSearches = localStorage.getItem(recentSearches)
+    }
+    console.log();
+
     $("#submit-btn").on("click", function (event) {
         event.preventDefault();
         // // songkick API

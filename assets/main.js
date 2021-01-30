@@ -20,6 +20,18 @@ $(document).ready(function () {
         }
     }
 
+    function isSaved(song) {
+        var localSearches = JSON.parse(localStorage.getItem('recentSearches'))
+        
+        for (var i = 0; i < localSearches.length; i++) {
+            if(song.toLowerCase().trim() === localSearches[0][1] ) {
+                return true;
+            }
+        }
+        return false;
+        
+    }
+
     $("#submit-btn").on("click", function (event) {
         event.preventDefault();
         // songsterr API
@@ -41,8 +53,12 @@ $(document).ready(function () {
         queryUrl = "https://api.lyrics.ovh/v1/" + artist + "/" + song + "/";
 
         // Saving artist and song to array
-        recentSearches.push([artist, song]);
-        localStorage.setItem('recentSearches', JSON.stringify(recentSearches))
+
+        if (isSaved(song) === false ) {
+            recentSearches.push([artist, song]);
+            localStorage.setItem('recentSearches', JSON.stringify(recentSearches))
+        }
+
 
         displayChips(recentSearches)
 

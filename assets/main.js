@@ -10,7 +10,8 @@ $(document).ready(function () {
             url: queryURL,
             method: "GET"
         }).then(function (response) {
-            console.log(response);
+            var data = response.slice(0,10);
+            console.log(data);
             console.log(queryURL);
         });
 

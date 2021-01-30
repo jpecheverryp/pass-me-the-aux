@@ -8,10 +8,22 @@ $(document).ready(function () {
     }
     console.log();
 
+    function displayChips(array) {
+
+        $("#chip-container").empty()
+
+        for (var i = 0; i < array.length; i++) {
+            const element = array[i];
+
+            var chip = $("<div>").addClass("chip").text(element)
+            $("#chip-container").append(chip)
+        }
+    }
+
     $("#submit-btn").on("click", function (event) {
         event.preventDefault();
         // songsterr API
-       
+
         var artist = $("#artistName").val();
         var queryURL = "http://www.songsterr.com/a/ra/songs.json?pattern=" + artist;
 
@@ -19,7 +31,7 @@ $(document).ready(function () {
             url: queryURL,
             method: "GET"
         }).then(function (response) {
-            var data = response.slice(0,10);
+            var data = response.slice(0, 10);
             console.log(data);
             console.log(queryURL);
         });
@@ -31,6 +43,8 @@ $(document).ready(function () {
         // Saving artist and song to array
         recentSearches.push([artist, song]);
         localStorage.setItem('recentSearches', JSON.stringify(recentSearches))
+
+        displayChips(recentSearches)
 
         $.ajax({
             url: queryUrl,

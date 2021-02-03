@@ -7,6 +7,8 @@ $(document).ready(function () {
         var recentSearches = JSON.parse(localStorage.getItem('recentSearches'));
     }
 
+    
+
     function displayChips(array) {
 
         $("#chip-container").empty()
@@ -22,10 +24,18 @@ $(document).ready(function () {
             // Join both artist and song name 
             const chipString = displayArtist + ' - ' + displaySong;
 
-            var chip = $("<div>").addClass("chip").text(chipString).css('text-transform', 'capitalize')
+            var chip = $("<div>").addClass("chip").text(chipString)
+            chip.css('text-transform', 'capitalize')
+            chip.attr('data-artist', element[0].toLowerCase())
+            chip.attr('data-song', element[1].toLowerCase())
             $("#chip-container").append(chip)
 
-            chip.append($('<i>').addClass('close material-icons').text('close'))
+            var closeChip = $('<i>').addClass('close material-icons').text('close');
+            chip.append(closeChip)
+            closeChip.on('click', function (e) {
+                var song = $(this).parent().data('song')
+                removeStorageItem(song)
+            })
 
         }
     }
@@ -42,6 +52,28 @@ $(document).ready(function () {
         
     }
 
+    function addStorageItem(artist, song) {
+        if (isSaved(song) === false ) {
+            recentSearches.push([artist, song]);
+            localStorage.setItem('recentSearches', JSON.stringify(recentSearches))
+        }
+    }
+
+    function removeStorageItem(song) {
+        for (let i = 0; i < recentSearches.length; i++) {
+            const element = recentSearches[i];
+            
+            if (element[1].toLowerCase().trim() === song.toLowerCase().trim()) {
+                
+                recentSearches.splice(i, 1);
+                i--;
+            }   
+        }
+        localStorage.setItem('recentSearches', JSON.stringify(recentSearches))
+    }
+
+    displayChips(recentSearches)
+
     $("#submit-btn").on("click", function (event) {
         event.preventDefault();
         // songsterr API
@@ -54,8 +86,6 @@ $(document).ready(function () {
             method: "GET"
         }).then(function (response) {
             var data = response.slice(0, 10);
-            console.log(data);
-            console.log(queryURL);
             for(var i = 0; i < data.length; i++){
                 var relatedSongs = $("<div class='collection'>");
                 var relSongEl = $("<a href='#!' class='collection-item'>")
@@ -72,10 +102,7 @@ $(document).ready(function () {
 
         // Saving artist and song to array
 
-        if (isSaved(song) === false ) {
-            recentSearches.push([artist, song]);
-            localStorage.setItem('recentSearches', JSON.stringify(recentSearches))
-        }
+        addStorageItem(artist, song)
 
 
         displayChips(recentSearches)

@@ -10,12 +10,22 @@ $(document).ready(function () {
 
     function displayChips(array) {
 
+        
+
         $("#chip-container").empty()
 
         for (var i = 0; i < array.length; i++) {
+            // Gets the current Element from the array
             const element = array[i];
 
-            var chip = $("<div>").addClass("chip").text(element)
+            // Gets the artist from array
+            var displayArtist = element[0]
+            // Gets the song from the element array
+            var displaySong = element[1]
+            // Join both artist and song name 
+            const chipString = displayArtist + ' - ' + displaySong;
+
+            var chip = $("<div>").addClass("chip").text(chipString).css('text-transform', 'capitalize')
             $("#chip-container").append(chip)
         }
     }
@@ -24,7 +34,7 @@ $(document).ready(function () {
         var localSearches = JSON.parse(localStorage.getItem('recentSearches'))
         
         for (var i = 0; i < localSearches.length; i++) {
-            if(song.toLowerCase().trim() === localSearches[0][1] ) {
+            if(song.toLowerCase().trim() === localSearches[0][1].toLowerCase().trim() ) {
                 return true;
             }
         }

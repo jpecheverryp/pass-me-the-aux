@@ -6,11 +6,8 @@ $(document).ready(function () {
     } else {
         var recentSearches = JSON.parse(localStorage.getItem('recentSearches'));
     }
-    console.log();
 
     function displayChips(array) {
-
-        
 
         $("#chip-container").empty()
 
@@ -27,6 +24,9 @@ $(document).ready(function () {
 
             var chip = $("<div>").addClass("chip").text(chipString).css('text-transform', 'capitalize')
             $("#chip-container").append(chip)
+
+            chip.append($('<i>').addClass('close material-icons').text('close'))
+
         }
     }
 
@@ -87,7 +87,7 @@ $(document).ready(function () {
             // Get lyrics
             var lyrics = result.lyrics;
             // Write title 
-            $('#song-title').text(song);
+            $('#song-title').text(song).css('text-transform', 'capitalize');
             // Write Lyrics
             $('#lyrics').html("<div id='lyrics'>" + result.lyrics.replace(/\n/g, "<br />") + '</div>');
             $('#lyrics').addClass('overflow');

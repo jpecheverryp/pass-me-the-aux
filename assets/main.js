@@ -1,5 +1,21 @@
 $(document).ready(function () {
 
+    function findLyrics(artist, song) {
+        queryUrl = "https://api.lyrics.ovh/v1/" + artist + "/" + song + "/";
+        $.ajax({
+            url: queryUrl,
+            method: "GET"
+        }).then(function (result) {
+            // Get lyrics
+            var lyrics = result.lyrics;
+            // Write title 
+            $('#song-title').text(song);
+            // Write Lyrics
+            $('#lyrics').html("<div id='lyrics'>" + result.lyrics.replace(/\n/g, "<br />") + '</div>');
+            $('#lyrics').addClass('overflow');
+        })
+    }
+
     if (localStorage.getItem('recentSearches') === null) {
         var recentSearches = [];
         localStorage.setItem('recentSearches', JSON.stringify(recentSearches));
@@ -76,6 +92,11 @@ $(document).ready(function () {
 
     $("#submit-btn").on("click", function (event) {
         event.preventDefault();
+
+        // Input Values
+        song = $("#songName").val();
+        artist = $("#artistName").val();
+
         // songsterr API
 
         var artist = $("#artistName").val();
@@ -96,29 +117,21 @@ $(document).ready(function () {
 
         });
 
-        song = $("#songName").val();
-        artist = $("#artistName").val();
-        queryUrl = "https://api.lyrics.ovh/v1/" + artist + "/" + song + "/";
-
         // Saving artist and song to array
 
         addStorageItem(artist, song)
 
+        findLyrics(artist,song)
 
         displayChips(recentSearches)
 
-        $.ajax({
-            url: queryUrl,
-            method: "GET"
-        }).then(function (result) {
-            // Get lyrics
-            var lyrics = result.lyrics;
-            // Write title 
-            $('#song-title').text(song).css('text-transform', 'capitalize');
-            // Write Lyrics
-            $('#lyrics').html("<div id='lyrics'>" + result.lyrics.replace(/\n/g, "<br />") + '</div>');
-            $('#lyrics').addClass('overflow');
-        })
+        // Related Songs Click Event
     });
+    $("#related").on("click", ".collection-item", function () {
+        console.log($(this).text())
+        artist = $("#artistName").val();
+        var song = $(this).text()
+        findLyrics(artist, song)
+    })
 })
 

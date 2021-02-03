@@ -6,17 +6,37 @@ $(document).ready(function () {
     } else {
         var recentSearches = JSON.parse(localStorage.getItem('recentSearches'));
     }
-    console.log();
+
+    
 
     function displayChips(array) {
 
         $("#chip-container").empty()
 
         for (var i = 0; i < array.length; i++) {
+            // Gets the current Element from the array
             const element = array[i];
 
-            var chip = $("<div>").addClass("chip").text(element)
+            // Gets the artist from array
+            var displayArtist = element[0]
+            // Gets the song from the element array
+            var displaySong = element[1]
+            // Join both artist and song name 
+            const chipString = displayArtist + ' - ' + displaySong;
+
+            var chip = $("<div>").addClass("chip").text(chipString)
+            chip.css('text-transform', 'capitalize')
+            chip.attr('data-artist', element[0].toLowerCase())
+            chip.attr('data-song', element[1].toLowerCase())
             $("#chip-container").append(chip)
+
+            var closeChip = $('<i>').addClass('close material-icons').text('close');
+            chip.append(closeChip)
+            closeChip.on('click', function (e) {
+                var song = $(this).parent().data('song')
+                removeStorageItem(song)
+            })
+
         }
     }
 
@@ -24,13 +44,35 @@ $(document).ready(function () {
         var localSearches = JSON.parse(localStorage.getItem('recentSearches'))
         
         for (var i = 0; i < localSearches.length; i++) {
-            if(song.toLowerCase().trim() === localSearches[0][1] ) {
+            if(song.toLowerCase().trim() === localSearches[0][1].toLowerCase().trim() ) {
                 return true;
             }
         }
         return false;
         
     }
+
+    function addStorageItem(artist, song) {
+        if (isSaved(song) === false ) {
+            recentSearches.push([artist, song]);
+            localStorage.setItem('recentSearches', JSON.stringify(recentSearches))
+        }
+    }
+
+    function removeStorageItem(song) {
+        for (let i = 0; i < recentSearches.length; i++) {
+            const element = recentSearches[i];
+            
+            if (element[1].toLowerCase().trim() === song.toLowerCase().trim()) {
+                
+                recentSearches.splice(i, 1);
+                i--;
+            }   
+        }
+        localStorage.setItem('recentSearches', JSON.stringify(recentSearches))
+    }
+
+    displayChips(recentSearches)
 
     $("#submit-btn").on("click", function (event) {
         event.preventDefault();
@@ -44,8 +86,6 @@ $(document).ready(function () {
             method: "GET"
         }).then(function (response) {
             var data = response.slice(0, 10);
-            console.log(data);
-            console.log(queryURL);
             for(var i = 0; i < data.length; i++){
                 var relatedSongs = $("<div class='collection'>");
                 var relSongEl = $("<a href='#!' class='collection-item'>")
@@ -62,10 +102,7 @@ $(document).ready(function () {
 
         // Saving artist and song to array
 
-        if (isSaved(song) === false ) {
-            recentSearches.push([artist, song]);
-            localStorage.setItem('recentSearches', JSON.stringify(recentSearches))
-        }
+        addStorageItem(artist, song)
 
 
         displayChips(recentSearches)
@@ -77,7 +114,7 @@ $(document).ready(function () {
             // Get lyrics
             var lyrics = result.lyrics;
             // Write title 
-            $('#song-title').text(song);
+            $('#song-title').text(song).css('text-transform', 'capitalize');
             // Write Lyrics
             $('#lyrics').html("<div id='lyrics'>" + result.lyrics.replace(/\n/g, "<br />") + '</div>');
             $('#lyrics').addClass('overflow');

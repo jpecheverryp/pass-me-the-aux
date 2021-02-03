@@ -24,41 +24,42 @@
 
     <!-- Recent Search -->
     <div class="container">
-        <div id="recent-searches" class="col s12">
-            <div class="card dim">
-                <div class="card-content">
-                    <span id="song-title" class="card-title">Recent Searches</span>
-                    <div id="chip-container" class="overflow"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container moreSpace">
         <div class="row">
 
-            <div class="col s12">
+            <div id="recent-searches" class="col s12 l3">
+                <div class="card dim">
+                    <div class="card-content">
+                        <span id="song-title" class="card-title">Recent Searches</span>
+                        <div id="chip-container" class="overflow"></div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col s12 l3">
                 <form>
                     <!-- Artist Input -->
-                    <div class="input-field col s7">
+                    <div class="input-field col s7 l12">
                         <input placeholder="Type Something..." id="artistName" type="text" class="validate">
                         <label for="Artist">Artist</label>
                     </div>
 
                     <!-- Song Input -->
-                    <div class="input-field col s7">
+                    <div class="input-field col s7 l12">
                         <input placeholder="Type Something..." id="songName" type="text" class="validate">
                         <label for="Song">Song</label>
                     </div>
 
                     <!-- Submit Button -->
-                    <div class="col s7">
+                    <div class="col s7 l7">
                         <input type="submit" id="submit-btn" class="waves-effect waves-light btn" value="Search">
                     </div>
                 </form>
             </div>
 
-            <div class="col s12 margin">
+
+            <div class="col s12 l6">
 
                 <!-- Lyrics -->
                 <div class="col s12">
@@ -69,19 +70,19 @@
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Recommended Songs -->
-                <div class="col s12">
-                    <div class="card">
-                        <div class="card-content" id="related">
-                            <span class="card-title">Related Songs</span>
-                            
-                        </div>
+            <!-- Recommended Songs -->
+            <div class="col s12">
+                <div class="card">
+                    <div class="card-content" id="related">
+                        <span class="card-title">Related Songs</span>
+
                     </div>
                 </div>
             </div>
+
         </div>
-    </div>
     </div>
 
 

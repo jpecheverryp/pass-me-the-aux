@@ -17,6 +17,27 @@ $(document).ready(function () {
         })
     }
 
+    function findRelatedSongs(artist) {
+        var queryURL = "https://www.songsterr.com/a/ra/songs.json?pattern=" + artist;
+
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function (response) {
+            $("#related").empty();
+            $("#related").append( $('<span>').text('Related Songs').addClass('card-title') )
+            var data = response.slice(0, 10);
+            for(var i = 0; i < data.length; i++){
+                var relatedSongs = $("<div class='collection'>");
+                var relSongEl = $("<a href='#!' class='collection-item'>")
+                relSongEl.text(response[i].title);
+                relatedSongs.append(relSongEl);
+                $("#related").append(relatedSongs);
+            }
+
+        });
+    }
+
     if (localStorage.getItem('recentSearches') === null) {
         var recentSearches = [];
         localStorage.setItem('recentSearches', JSON.stringify(recentSearches));
@@ -53,7 +74,12 @@ $(document).ready(function () {
                 var song = $(this).parent().data('song')
                 removeStorageItem(song)
             })
-
+            chip.on('click', function (e) {
+                var artist = $(this).data('artist')
+                var song = $(this).data('song') 
+                findLyrics(artist, song);
+                findRelatedSongs(artist)
+            })
         }
     }
 
@@ -101,22 +127,12 @@ $(document).ready(function () {
         // songsterr API
 
         var artist = $("#artistName").val();
-        var queryURL = "https://www.songsterr.com/a/ra/songs.json?pattern=" + artist;
 
-        $.ajax({
-            url: queryURL,
-            method: "GET"
-        }).then(function (response) {
-            var data = response.slice(0, 10);
-            for(var i = 0; i < data.length; i++){
-                var relatedSongs = $("<div class='collection'>");
-                var relSongEl = $("<a href='#!' class='collection-item'>")
-                relSongEl.text(response[i].title);
-                relatedSongs.append(relSongEl);
-                $("#related").append(relatedSongs);
-            }
+        findRelatedSongs(artist);
 
-        });
+        
+
+        
 
         // Saving artist and song to array
 
@@ -133,6 +149,8 @@ $(document).ready(function () {
         artist = $("#artistName").val();
         var song = $(this).text()
         findLyrics(artist, song)
+        addStorageItem(artist, song)
+        displayChips(recentSearches)
     })
 })
 

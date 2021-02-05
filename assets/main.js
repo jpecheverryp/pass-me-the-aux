@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    
 
     function findLyrics(artist, song) {
         queryUrl = "https://api.lyrics.ovh/v1/" + artist + "/" + song + "/";
@@ -100,7 +101,7 @@ $(document).ready(function () {
         // songsterr API
 
         var artist = $("#artistName").val();
-        var queryURL = "http://www.songsterr.com/a/ra/songs.json?pattern=" + artist;
+        var queryURL = "https://www.songsterr.com/a/ra/songs.json?pattern=" + artist;
 
         $.ajax({
             url: queryURL,

@@ -1,6 +1,6 @@
 # Pass Me The AUX
 
-[Go to the App](https://jpecheverryp.github.io/pass-me-the-aux/search.html)
+[Go to the App](https://jpecheverryp.github.io/pass-me-the-aux/index.html)
 
 ## Description
 A Music app that lets you see the lyrics of a song and future events for the artist of that song

@@ -8,3 +8,8 @@
     overflow: hidden;
     overflow: scroll;
 }
+
+.semi-transparent {
+    background: rgba(0, 188, 212, 0.8);
+    padding: 0 1rem;
+}

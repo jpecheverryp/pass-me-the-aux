@@ -1,5 +1,7 @@
 # Pass Me The AUX
 
+[Go to the App](https://jpecheverryp.github.io/pass-me-the-aux/index.html)
+
 ## Description
 A Music app that lets you see the lyrics of a song and future events for the artist of that song
 
@@ -15,6 +17,7 @@ SO THAT I can buy tickets to their next concert and sing along to the songs
 ## Mock-Up
 ![Mobile View](images/mobile.png)
 ![Desktop View](images/desktop.png)
+<<<<<<< HEAD
 
 ## Contact Info
 jaclay94@gmail.com | 678-836-5753 | Atlanta, GA 
@@ -49,3 +52,5 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+=======
+>>>>>>> abe5f468779bf5b720a73dc43f18d9c236b91553
